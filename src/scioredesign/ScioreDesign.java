@@ -15,7 +15,7 @@ public class ScioreDesign {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // CheckingAccount must implement the additional method addInterest. Doing so turns out to be very easy. The addInterest method simply needs to do nothing:
     }
     
 }
