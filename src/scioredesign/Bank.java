@@ -1,54 +1,60 @@
 package scioredesign;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class Bank {
+   private Map<Integer,BankAccount> accounts;
+   private int nextacct;
 
-    private HashMap<Integer, BankAccount> accounts;
+   public Bank(Map<Integer,BankAccount> accounts, int n) {
+      this.accounts = accounts;
+      nextacct = n;
+   }
 
-    private int nextacct;
+   public int newAccount(int type, boolean isforeign) {
+      int acctnum = nextacct++;
+      BankAccount ba;
+      if (type == 1) 
+         ba = new SavingsAccount(acctnum);
+      else
+         ba = new CheckingAccount(acctnum);
+      ba.setForeign(isforeign);
+      accounts.put(acctnum, ba);
+      return acctnum;
+   }
 
-    public Bank(HashMap<Integer, BankAccount> accounts) {
-        this.accounts = accounts;
-        nextacct = n;
-    }
+   public int getBalance(int acctnum) {
+      BankAccount ba = accounts.get(acctnum);
+      return ba.getBalance();
+   }
 
-    public int newAccount(int type, boolean isforeign) {
-        int acctnum = nextacct++;
-        BankAccount ba;
-        if (type == 1) {
-            ba = new SavingsAccount(acctnum);
-        } else {
-            ba = new CheckingAccount(acctnum);
-        }
-        ba.setForeign(isforeign);
-        accounts.put(acctnum, ba);
-        return acctnum;
-    }
+   public void setForeign(int acctnum, boolean isforeign) {
+      BankAccount ba = accounts.get(acctnum);
+      ba.setForeign(isforeign);
+   }
 
-    public int getBalance(int acctnum) {
-        BankAccount ba = accounts.get(acctnum);
-        return ba.getBalance();
-    }
+   public void deposit(int acctnum, int amt) {
+      BankAccount ba = accounts.get(acctnum);
+      ba.deposit(amt);
+   }
 
-    public void addInterest() {
-        for (BankAccount ba : accounts.values()) {
-            ba.addInterest();
-        }
-    }
+   public boolean authorizeLoan(int acctnum, int loanamt) {
+      BankAccount ba = accounts.get(acctnum);
+      return ba.hasEnoughCollateral(loanamt);
+   }
 
-    public void deposit(int a, int n) {
-    }
+   public String toString() {
+      String result = "The bank has " + accounts.size() + " accounts.";
+      for (BankAccount ba : accounts.values())
+         result += "\n\t" + ba.toString();
+      return result;
+   }
 
-    public boolean authorizeLoad(int a, int n) {
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "adsf";
-    }
-
-    public void setForeing(int a, boolean b) {
-    }
+   public void addInterest() {
+      for (BankAccount ba : accounts.values())
+         ba.addInterest();
+   }
 }
+
+
+

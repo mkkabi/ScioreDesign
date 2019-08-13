@@ -1,20 +1,22 @@
 package scioredesign;
 
-public interface BankAccount extends Comparable<BankAccount> {
+public interface BankAccount extends Comparable<BankAccount> { 
+   int getAcctNum();
+   int getBalance();   
+   void deposit(int amt);
+   boolean isForeign();
+   void setForeign(boolean isforeign);
+   boolean hasEnoughCollateral(int loanamt);
+   String toString();
+   void addInterest();
 
-    public abstract int getAcctNum();
+   static BankAccount createSavingsWithDeposit(int acctnum, int n) {
+      BankAccount ba = new SavingsAccount(acctnum);
+      ba.deposit(n);
+      return ba;
+   }
 
-    public abstract int getBalance();
-
-    public abstract boolean isForeign();
-
-    public abstract void setForeign(boolean isforeign);
-
-    public abstract void deposit(int amt);
-
-    public abstract boolean hasEnoughCollateral(int loanamt);
-
-    public abstract String toString();
-
-    void addInterest();
+   default boolean isEmpty() {
+      return getBalance() == 0;
+   }
 }
