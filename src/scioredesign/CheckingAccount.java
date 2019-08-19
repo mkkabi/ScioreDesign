@@ -1,61 +1,16 @@
-package scioredesign;
+package javaprogramdesign.chapter03.bank09;
 
-public class CheckingAccount implements BankAccount  {
-   private int acctnum;
-   private int balance = 0;
-   private boolean isforeign = false;
+public abstract class CheckingAccount extends AbstractBankAccount {
 
-   public CheckingAccount(int acctnum) {
-      this.acctnum = acctnum;
+   protected CheckingAccount(int acctnum) {
+      super(acctnum);
    }
 
-   public int getAcctNum() { 
-      return acctnum; 
+   protected double collateralRatio() {
+      return 2.0 / 3.0;
    }
 
-   public int getBalance() { 
-      return balance; 
-   }
-
-   public void deposit(int amt) {
-      balance += amt;
-   }
-
-   public boolean isForeign() {
-      return isforeign;
-   }
-
-   public void setForeign(boolean b) {
-      isforeign = b;
-   }
-
-   public boolean hasEnoughCollateral(int loanamt) {
-      return balance >= 2 * loanamt / 3;
-   }
-
-   public String toString() {
-      return "Checking account " + acctnum + ": balance=" + balance 
-            + ", is " + (isforeign ? "foreign" : "domestic");
-   }
-
-   public void addInterest() {
-      // do nothing
-   }
-
-   public int compareTo(BankAccount ba) {
-      int bal1 = getBalance();
-      int bal2 = ba.getBalance();
-      if (bal1 == bal2)
-         return getAcctNum() - ba.getAcctNum();
-      else
-         return bal1 - bal2;
-   }
-
-   public boolean equals(Object obj) {
-      if (! (obj instanceof CheckingAccount))
-         return false;
-      CheckingAccount ba = (CheckingAccount) obj;
-      return getAcctNum() == ba.getAcctNum();
-   }
+   protected abstract String accountType();
+   protected abstract double interestRate();
 }
 

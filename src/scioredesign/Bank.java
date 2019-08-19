@@ -1,4 +1,4 @@
-package scioredesign;
+package javaprogramdesign.chapter03.bank09;
 
 import java.util.*;
 
@@ -16,8 +16,10 @@ public class Bank {
       BankAccount ba;
       if (type == 1) 
          ba = new SavingsAccount(acctnum);
+      else if (type == 2)  
+         ba = new RegularChecking(acctnum);
       else
-         ba = new CheckingAccount(acctnum);
+         ba = new InterestChecking(acctnum);
       ba.setForeign(isforeign);
       accounts.put(acctnum, ba);
       return acctnum;
@@ -53,6 +55,10 @@ public class Bank {
    public void addInterest() {
       for (BankAccount ba : accounts.values())
          ba.addInterest();
+   }
+
+   public int nextAcctNum() {
+      return nextacct;
    }
 }
 

@@ -1,16 +1,17 @@
 package javaprogramdesign.chapter03.bank09;
 
-public class InterestChecking extends CheckingAccount {
-   public InterestChecking(int acctnum) {
+public class RegularChecking extends CheckingAccount {
+
+   public RegularChecking(int acctnum) {
       super(acctnum);
    }
 
    protected String accountType() {
-      return "Interest checking";
+      return "Regular checking";
    }
 
    protected double interestRate() {
-      return 0.01;
+      return 0.0;
    }
 }
 

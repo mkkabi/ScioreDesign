@@ -1,4 +1,4 @@
-package scioredesign;
+package javaprogramdesign.chapter03.bank09;
 
 import java.util.*;
 
@@ -40,7 +40,7 @@ public class BankClient {
    }
 
    private void newAccount() {
-      System.out.print("Enter account type(1=savings, 2=checking): ");
+      System.out.print("Enter account type(1=savings, 2=checking, 3=interest checking): ");
       int type = scanner.nextInt();
       boolean isforeign = requestForeign();
       current = bank.newAccount(type, isforeign);

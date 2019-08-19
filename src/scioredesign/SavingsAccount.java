@@ -1,62 +1,20 @@
-package scioredesign;
+package javaprogramdesign.chapter03.bank09;
 
-public class SavingsAccount implements BankAccount, Comparable<BankAccount> {
-   private double rate = 0.01;
-   private int acctnum;
-   private int balance = 0;
-   private boolean isforeign = false;
-
+public class SavingsAccount extends AbstractBankAccount {
    public SavingsAccount(int acctnum) {
-      this.acctnum = acctnum;
+      super(acctnum);
    }
 
-   public int getAcctNum() { 
-      return acctnum; 
+   protected double collateralRatio() {
+      return 1.0 / 2.0;
    }
 
-   public int getBalance() { 
-      return balance; 
+   protected String accountType() {
+      return "Savings";
    }
 
-   public boolean isForeign() {
-      return isforeign;
-   }
-
-   public void setForeign(boolean b) {
-      isforeign = b;
-   }
-
-   public void deposit(int amt) {
-      balance += amt;
-   }
-
-   public boolean hasEnoughCollateral(int loanamt) {
-      return balance >= loanamt / 2;
-   }
-
-   public String toString() {
-      return "Savings account " + acctnum + ": balance=" + balance 
-            + ", is " + (isforeign ? "foreign" : "domestic");
-   }
-
-   public void addInterest() {
-      balance += (int) (balance * rate);
-   }
-
-   public int compareTo(BankAccount ba) {
-      int bal1 = getBalance();
-      int bal2 = ba.getBalance();
-      if (bal1 == bal2)
-         return getAcctNum() - ba.getAcctNum();
-      else
-         return bal1 - bal2;
-   }
-
-   public boolean equals(Object obj) {
-      if (! (obj instanceof SavingsAccount))
-         return false;
-      SavingsAccount ba = (SavingsAccount) obj;
-      return getAcctNum() == ba.getAcctNum();
+   protected double interestRate() {
+      return 0.01;
    }
 }
 

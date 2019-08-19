@@ -1,4 +1,4 @@
-package scioredesign;
+package javaprogramdesign.chapter03.bank09;
 
 public interface BankAccount extends Comparable<BankAccount> { 
    int getAcctNum();
